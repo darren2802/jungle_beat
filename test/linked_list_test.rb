@@ -80,4 +80,45 @@ class TestLinkedList < Minitest::Test
     assert_equal "woo dop plop suu", @list.to_string
     assert_equal 4, @list.count
   end
+
+  def test_find_in_list_1
+    @list.append("woo")
+    @list.append("shi")
+    @list.append("blop")
+    @list.prepend("deep")
+    @list.insert(3,"shu")
+    assert_equal "deep woo shi shu blop", @list.to_string
+    assert_equal "shi", @list.find(2, 1)
+  end
+
+  def test_find_in_list_2
+    @list.append("woo")
+    @list.append("shi")
+    @list.append("blop")
+    @list.prepend("deep")
+    @list.insert(3,"shu")
+    assert_equal "deep woo shi shu blop", @list.to_string
+    assert_equal "woo shi shu", @list.find(1, 3)
+  end
+
+  def test_includes?
+    @list.append("woo")
+    @list.append("shi")
+    @list.append("blop")
+    @list.prepend("deep")
+    @list.insert(3,"shu")
+    assert @list.includes?("deep")
+    refute @list.includes?("dep")
+  end
+
+  def test_pop
+    @list.append("woo")
+    @list.append("shi")
+    @list.append("blop")
+    @list.prepend("deep")
+    @list.insert(3,"shu")
+    assert_equal "blop", @list.pop
+    assert_equal "shu", @list.pop
+    assert_equal "deep woo shi", @list.to_string
+  end
 end

@@ -33,6 +33,7 @@ class LinkedList
   def insert(position, data)
     if @head
       return prepend(data) if position == 0
+      return append(data) if position >= count
       index = 0
       current_node = @head
       loop do
@@ -47,6 +48,46 @@ class LinkedList
       end
     else
       append(data)
+    end
+  end
+
+  def find(position, count)
+    index = 0
+    tally = 0
+    current_node = @head
+    data_str = ''
+    loop do
+      if index == position || tally > 0
+        data_str += current_node.data + ' '
+        tally += 1
+        return data_str.strip if tally == count
+      end
+      current_node = current_node.next_node
+      index += 1
+    end
+  end
+
+  def includes?(data)
+    current_node = @head
+    loop do
+      return true if current_node.data == data
+      return false if !current_node.next_node
+      current_node = current_node.next_node
+    end
+  end
+
+  def pop
+    return nil if count < 2
+    current_node = @head
+    counter = 1
+    loop do
+      if counter == count - 1
+        data = current_node.next_node.data
+        current_node.next_node = nil
+        return data
+      end
+      counter += 1
+      current_node = current_node.next_node
     end
   end
 
