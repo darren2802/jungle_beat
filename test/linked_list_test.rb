@@ -40,4 +40,44 @@ class TestLinkedList < Minitest::Test
     @list.append("deep")
     assert_equal "doop deep", @list.to_string
   end
+
+  def test_prepend_without_head
+    assert_nil @list.head
+    @list.prepend("dop")
+    assert_instance_of Node, @list.head
+  end
+
+  def test_prepend_with_head
+    @list.append("plop")
+    @list.append("suu")
+    @list.prepend("dop")
+    assert_equal "dop plop suu", @list.to_string
+    assert_equal 3, @list.count
+  end
+
+  def test_insert_without_head
+    assert_nil @list.head
+    @list.insert(1, "woo")
+    assert_instance_of Node, @list.head
+  end
+
+  def test_insert_with_head
+    @list.append("plop")
+    @list.append("suu")
+    @list.prepend("dop")
+    assert_equal "dop plop suu", @list.to_string
+    assert_equal 3, @list.count
+    @list.insert(1, "woo")
+    assert_equal "dop woo plop suu", @list.to_string
+    assert_equal 4, @list.count
+  end
+
+  def test_insert_with_head_at_0_position
+    @list.append("plop")
+    @list.append("suu")
+    @list.prepend("dop")
+    @list.insert(0, "woo")
+    assert_equal "woo dop plop suu", @list.to_string
+    assert_equal 4, @list.count
+  end
 end
