@@ -8,14 +8,32 @@ class LinkedList
   end
 
   def append(data)
-    @head = Node.new(data)
+    if @head
+      @head.next_node = Node.new(data)
+    else
+      @head = Node.new(data)
+    end
   end
 
   def count
-    1
+    count = 0
+    current_node = @head
+    loop do
+      break if !current_node
+      count += 1
+      current_node = current_node.next_node
+    end
+    count
   end
 
   def to_string
-    @head.data
+    list_str = ''
+    current_node = @head
+    loop do
+      break if !current_node
+      list_str += current_node.data + ' '
+      current_node = current_node.next_node
+    end
+    list_str.strip
   end
 end
