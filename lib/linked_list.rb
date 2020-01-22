@@ -3,8 +3,8 @@ require_relative "./node"
 class LinkedList
   attr_reader :head
 
-  def initialize(head=nil)
-    @head = head
+  def initialize(head_data=nil)
+    @head = Node.new(head_data) if head_data
   end
 
   def append(data)
